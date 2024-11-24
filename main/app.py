@@ -6,7 +6,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import google.generativeai as genai
-import random
 
 
 # Load the saved model and scaler
@@ -150,7 +149,7 @@ def calculate_affordability(monthly_payment, monthly_income, monthly_expenses):
 
 st.set_page_config(page_title="Loan Repayment Predictor", layout="wide")
     
-st.header("🏦 Forecasting Timeline of Overseas Loan")
+st.title("🏦 Loan Repayment Timeline Predictor")
 st.markdown("---")
 
 
@@ -446,71 +445,9 @@ st.write("Get the best recommendations based on your loan repayment")
 if st.button("Recommend"):
     x = f"Given a loan of {loan_amount} USD with an interest rate of {interest_rate}% and a monthly repayment  " \
     f"what repayment strategies would you recommend to ensure that the user can complete the repayment months " \
-    f"without getting into financial trouble or falling into debt? also give a few financial aids such as scholarship emergency fund etc"
+    f"without getting into financial trouble or falling into debt?"
     ai_response = generate_response(x)  
     st.write(ai_response)
 
 
-def generate_random_link():
-    domains = ['linkedin.com/jobs', 'indeed.com', 'glassdoor.com', 'monster.com', 'dice.com']
-    paths = ['software', 'tech', 'engineering', 'developer', 'programming']
-    return f"https://www.{random.choice(domains)}/{random.choice(paths)}/"
 
-if st.button("Find Software Jobs"):
-    # Title and description
-    st.title("💻 Unique Software Jobs")
-    st.write("Discover some specialized roles in the software industry!")
-
-    # Create DataFrame with software jobs information
-    jobs_data = {
-        'Job Title': [
-            'ML Operations Engineer',
-            'Blockchain Developer',
-            'Game Physics Programmer',
-            'Computer Vision Engineer',
-            'Quantum Computing Developer'
-        ],
-        'Annual Salary Range': [
-            '$120,000 - $180,000',
-            '$130,000 - $200,000',
-            '$95,000 - $150,000',
-            '$110,000 - $170,000',
-            '$150,000 - $250,000'
-        ],
-        'Description': [
-            'Builds and maintains machine learning infrastructure, ensures smooth deployment of ML models, and optimizes ML pipelines for production environments.',
-            'Develops and implements blockchain protocols, smart contracts, and decentralized applications (dApps) using technologies like Ethereum and Solidity.',
-            'Creates realistic physics simulations for video games, implements physics engines, and optimizes performance for real-time gaming experiences.',
-            'Develops algorithms for image and video processing, implements object detection systems, and creates computer vision solutions for autonomous systems.',
-            'Develops quantum algorithms, works with quantum computing frameworks, and optimizes code for quantum hardware architectures.'
-        ]
-    }
-
-    # Convert to DataFrame
-    df = pd.DataFrame(jobs_data)
-
-    # Display each job in an expander with random links
-    for idx, row in df.iterrows():
-        with st.expander(f"💼 {row['Job Title']} | {row['Annual Salary Range']}", expanded=False):
-            st.write(row['Description'])
-            job_links = [generate_random_link() for _ in range(3)]
-            st.write("### Sample Job Listings:")
-            for i, link in enumerate(job_links, 1):
-                st.markdown(f"{i}. [Apply Here - Company {random.randint(1, 100)}]({link})")
-            
-    # Add some statistics
-    st.sidebar.header("Quick Facts")
-    st.sidebar.info(f"""
-    - Total Jobs Showcased: {len(df)}
-    - Highest Potential Salary: $250,000
-    - Average Minimum Salary: ${sum([int(range.split(' - ')[0].replace('$','').replace(',','')) for range in df['Annual Salary Range']])/len(df):,.2f}
-    - Industry: Software & Technology
-    - Required Experience: 3-5 years average
-    """)
-
-    # Footer
-    st.markdown("---")
-    st.markdown("""
-    *Salary ranges are approximate and may vary based on location, experience, and company.*  
-    *Job listings are randomly generated for demonstration purposes.*
-    """)
