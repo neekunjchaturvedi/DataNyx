@@ -3,3 +3,4 @@ pandas
 numpy
 joblib
 plotly
+google.generativeai
