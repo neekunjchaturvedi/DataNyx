@@ -164,7 +164,7 @@ with col1:
 with col2:
     st.subheader("Financial Information")
     monthly_income = st.number_input("Monthly Income (USD)", min_value=1000, max_value=100000, value=15000, step=100)
-    monthly_expenses = st.number_input("Monthly Expenses (USD)", min_value=0, max_value=monthly_income, value=8000, step=100)
+    monthly_expenses = st.number_input("Monthly Expenses (USD)", min_value=0, max_value=monthly_income, step=100)
 
 if st.button("Calculate Repayment Options", type="primary"):
     
